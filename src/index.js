@@ -38,7 +38,28 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    const CODE_TABLE = {
+        '00': '',
+        '10': '.',
+        '11': '-',
+      };
+      const probel = '**********'; 
+      const letter_length = 10;
+      
+      let res_str ='';
+      
+      for(j=0; j<expr.length;j+=letter_length){
+        let cur_letter_code = expr.substr(j,letter_length);
+        if(cur_letter_code == probel){
+          res_str+=' ' ;
+        }else{
+          for(i=0, tmp='';i<letter_length;i+=2){  
+            tmp+= CODE_TABLE[cur_letter_code.substr(i,2)];
+          }
+          res_str+=(MORSE_TABLE[tmp]);
+        }
+      }
+      return(res_str);    
 }
 
 module.exports = {
